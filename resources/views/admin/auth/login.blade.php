@@ -4,12 +4,11 @@
         <div class="card-body">
             <h2 class="h2 text-center mb-4">Login to your Admin account</h2>
 
-            <form action="{{ route('admin.login') }}" method="POST" autocomplete="off" novalidate>
+            <form action="{{ route('admin.login') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}"
-                           required autofocus autocomplete="username">
+                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required autofocus autocomplete="username">
                     <x-input-error :messages="$errors->get('email')" class="mt-2"/>
                 </div>
 
@@ -21,7 +20,6 @@
                     <div class="input-group input-group-flat">
                         <input type="password" name="password" class="form-control" required
                                autocomplete="current-password">
-                        <x-input-error :messages="$errors->get('password')" class="mt-2"/>
                         <span class="input-group-text">
                     <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
