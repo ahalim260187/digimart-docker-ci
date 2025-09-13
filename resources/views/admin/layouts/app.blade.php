@@ -1,36 +1,47 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<!doctype html>
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign in</title>
+    <!-- CSS files -->
+    <link href={{ asset('assets/admin/dist/css/tabler.min.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/admin/dist/css/tabler-flags.min.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/admin/dist/css/tabler-payments.min.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/admin/dist/css/tabler-vendors.min.css') }} rel="stylesheet" />
+    <link href={{ asset('assets/admin/dist/css/demo.min.css') }} rel="stylesheet" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('admin.layouts.navigation')
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+    </style>
+</head>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                @yield('content')
-            </main>
+<body class=" d-flex flex-column">
+    <script src={{ asset('assets/admin/dist/js/demo-theme.min.js') }}></script>
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            <div class="text-center mb-4">
+                <a href="../auth/layout" class="navbar-brand navbar-brand-autodark">
+                    <img src={{ asset('assets/admin/static/logo.svg') }} width="110" height="32" alt="Tabler"
+                        class="navbar-brand-image">
+                </a>
+            </div>
+            @yield('content')
         </div>
-    </body>
+    </div>
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src={{ asset('assets/admin/dist/js/tabler.min.js') }} defer></script>
+    <script src={{ asset('assets/admin/dist/js/demo.min.js') }} defer></script>
+</body>
+
 </html>
