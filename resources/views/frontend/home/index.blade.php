@@ -1,0 +1,12 @@
+@extends('frontend.layouts.master')
+@section('content')
+    @include('frontend.layouts.header')
+    @include('frontend.home.sections.banner')
+    @include('frontend.home.sections.category')
+    @include('frontend.home.sections.counter')
+    @include('frontend.home.sections.featured-product')
+    @include('frontend.home.sections.product')
+    @include('frontend.home.sections.featured-author-product')
+    @include('frontend.home.sections.top-performance')
+    @include('frontend.layouts.footer')
+@endsection
