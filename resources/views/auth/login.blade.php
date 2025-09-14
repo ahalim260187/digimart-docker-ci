@@ -98,7 +98,7 @@
                                     <div class="wsus__login_imput">
                                         <label>email</label>
                                         <input id="email" type="email" placeholder="Email" name="email"
-                                            :value="old('email')" required autofocus autocomplete="username">
+                                            value="{{ old('email') }}" required autofocus autocomplete="username">
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
                                 </div>
