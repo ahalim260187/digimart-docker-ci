@@ -1,6 +1,17 @@
 @extends('user.dashboard.index')
 @section('content_dashboard')
     <div class="dashboard-body__content">
+        @if (session('status') === 'profile-updated')
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Profile updated successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif (session('status') === 'password-updated')
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Password updated successfully.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <!-- Profile Content Start -->
         <div class="profile">
             <div class="row gy-4">
@@ -100,6 +111,12 @@
                                         role="tab" aria-controls="pills-changePassword" aria-selected="false">Change
                                         Password</button>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link text-danger font-18 font-heading" id="pills-deleteAccount-tab"
+                                        data-bs-toggle="pill" data-bs-target="#pills-deleteAccount" type="button"
+                                        role="tab" aria-controls="pills-deleteAccount" aria-selected="false">Delete
+                                        Account</button>
+                                </li>
                             </ul>
                         </div>
 
@@ -107,6 +124,7 @@
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-personalInfo" role="tabpanel"
                                     aria-labelledby="pills-personalInfo-tab" tabindex="0">
+                                    {{-- Form Personal Data --}}
                                     <form method="POST" action="{{ route('profile.update') }}" autocomplete="off">
                                         @csrf
                                         @method('PATCH')
@@ -196,6 +214,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="pills-changePassword" role="tabpanel"
                                     aria-labelledby="pills-changePassword-tab" tabindex="0">
+                                    {{-- Form Change Password --}}
                                     <form method="POST" action="{{ route('profile.password.update') }}"
                                         autocomplete="off">
                                         @csrf
@@ -268,14 +287,41 @@
                                         </div>
                                     </form>
                                 </div>
+                                <div class="tab-pane fade" id="pills-deleteAccount" role="tabpanel"
+                                    aria-labelledby="pills-deleteAccount-tab" tabindex="0">
+                                    <form method="POST" action="{{ route('profile.destroy') }}"
+                                        onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');"
+                                        autocomplete="off">
+                                        @csrf
+                                        @method('DELETE')
+                                        @if ($errors->userDeletion?->has('password'))
+                                            <div class="alert alert-danger">{{ $errors->userDeletion->first('password') }}
+                                            </div>
+                                        @endif
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form_box">
+                                                    <label for="delete_password"
+                                                        class="form-label mb-2 font-18 font-heading fw-600">Password</label>
+                                                    <input type="password" name="password" class="common-input border"
+                                                        id="delete_password" placeholder="Password" required
+                                                        autocomplete="current-password">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn btn-danger btn-lg" type="submit">Delete
+                                                    Account</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Profile Content End -->
+            <!-- Profile Content End -->
 
-    </div>
-@endsection
+        </div>
+    @endsection

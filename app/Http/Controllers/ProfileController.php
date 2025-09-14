@@ -49,7 +49,8 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-        $user->password = bcrypt($request->password);        $user->save();
+        $user->password = bcrypt($request->password);        
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'password-updated');
     }
