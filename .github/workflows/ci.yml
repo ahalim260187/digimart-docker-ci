@@ -1,0 +1,35 @@
+name: Laravel Docker CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker images
+        run: docker compose build
+
+      - name: Run Docker containers
+        run: docker compose up -d
+
+      - name: Wait for services
+        run: sleep 20
+
+      - name: Install Composer dependencies
+        run: docker exec digimart-app composer install --no-interaction --prefer-dist
+
+      - name: Laravel sanity check
+        run: |
+          docker exec digimart-app php artisan key:generate
+          docker exec digimart-app php artisan migrate --force
