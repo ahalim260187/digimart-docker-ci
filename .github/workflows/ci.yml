@@ -29,6 +29,10 @@ jobs:
       - name: Install Composer dependencies
         run: docker exec digimart-app composer install --no-interaction --prefer-dist
 
+      - name: Prepare Laravel environment
+        run: |
+          docker exec digimart-app cp .env.example .env
+
       - name: Laravel sanity check
         run: |
           docker exec digimart-app php artisan key:generate
