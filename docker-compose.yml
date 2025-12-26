@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: digimart-app
+    volumes:
+      - .:/var/www
+    working_dir: /var/www
+    depends_on:
+      - db
+    networks:
+      - digimart
+
+  web:
+    image: nginx:alpine
+    container_name: digimart-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - digimart
+
+  db:
+    image: mysql:8.0
+    container_name: digimart-db
+    environment:
+      MYSQL_DATABASE: digimart
+      MYSQL_USER: digimart
+      MYSQL_PASSWORD: digimart
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - digimart
+
+volumes:
+  dbdata:
+
+networks:
+  digimart:
+
