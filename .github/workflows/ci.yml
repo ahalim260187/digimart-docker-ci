@@ -27,13 +27,14 @@ jobs:
         run: sleep 20
 
       - name: Install Composer dependencies
-        run: docker exec digimart-app composer install --no-interaction --prefer-dist
+        run: |
+          docker exec digimart-app sh -c "cd /var/www && composer install --no-interaction --prefer-dist"
 
       - name: Prepare Laravel environment
         run: |
-          docker exec digimart-app cp .env.example .env
+          docker exec digimart-app sh -c "cd /var/www && cp .env.example .env"
 
       - name: Laravel sanity check
         run: |
-          docker exec digimart-app php artisan key:generate
-          docker exec digimart-app php artisan migrate --force
+          docker exec digimart-app sh -c "cd /var/www && php artisan key:generate"
+          docker exec digimart-app sh -c "cd /var/www && php artisan migrate --force"
