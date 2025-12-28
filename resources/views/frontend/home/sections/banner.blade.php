@@ -8,7 +8,7 @@
                 <div class="col-xl-6 col-lg-9 col-12">
                     <div class="hero-inner position-relative">
                         <div>
-                            <h1 class="hero-inner__title">--UPDATE INI BERUBAH DI PRODUCTION -- 2 million+ well chosen digital</h1>
+                            <h1 class="hero-inner__title">--UPDATE ke2 INI BERUBAH DI PRODUCTION -- 2 million+ well chosen digital</h1>
                             <p class="hero-inner__desc font-18">Explore the best premium themes and plugins
                                 available for sale. Our unique collection is hand-curated by experts. Find and buy
                                 the perfect premium theme today.</p>
